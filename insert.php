@@ -3,10 +3,10 @@
 require "settings/init.php";
 
 
-/*Hvis post data ikke er tom  */
+
 if(!empty($_POST["data"])){
 
-    $data = $_POST["data"]; /*En variable så vi slipper for at skrive $_POST["data"] hvergang vi skal bruge det*/
+    $data = $_POST["data"];
 
     $sql = "INSERT INTO produkter (bogNavn, bogBeskrivelse, bogForfatter, bogForlag, bogDato, bogType, bogPris, bogKategori, bogISBN) VALUES(:bogNavn, :bogBeskrivelse, :bogForfatter, :bogForlag, :bogDato, :bogType, :bogPris, :bogKategori, :bogISBN)";
     $bind = [

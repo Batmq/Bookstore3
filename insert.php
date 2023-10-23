@@ -2,13 +2,22 @@
 
 require "settings/init.php";
 
-
-
 if(!empty($_POST["data"])){
 
     $data = $_POST["data"];
+    $file = $_FILES; /*Til at hente billeder*/
 
-    $sql = "INSERT INTO produkter (bogNavn, bogBeskrivelse, bogForfatter, bogForlag, bogDato, bogType, bogPris, bogKategori, bogISBN) VALUES(:bogNavn, :bogBeskrivelse, :bogForfatter, :bogForlag, :bogDato, :bogType, :bogPris, :bogKategori, :bogISBN)";
+    /*Sørger for der ikke bliver uploadet, hvis der ikke er et billede*/
+    /*tmp-name giver det et midlertidigt navn*/
+        if(!empty($file["bogBillede"]["tmp_name"])){
+            /*Her kaldes en funktion som vi giver to parameter. Først skal den vide hvilken fil den skal flytte og så skal vi fortælle, hvor filen skal flyttes hen */
+            move_uploaded_file($file["bogBillede"]["tmp_name"], "uploads/" . basename($file["bogBillede"]["name"]));
+        }
+
+
+
+
+    $sql = "INSERT INTO produkter (bogNavn, bogBeskrivelse, bogForfatter, bogForlag, bogDato, bogType, bogPris, bogKategori, bogISBN, bogBillede) VALUES(:bogNavn, :bogBeskrivelse, :bogForfatter, :bogForlag, :bogDato, :bogType, :bogPris, :bogKategori, :bogISBN, :bogBillede)";
     $bind = [
         ":bogNavn" => $data["bogNavn"],
         ":bogBeskrivelse" => $data["bogBeskrivelse"],
@@ -18,11 +27,15 @@ if(!empty($_POST["data"])){
         ":bogType" => $data["bogType"],
         ":bogPris" => $data["bogPris"],
         ":bogKategori" => $data["bogKategori"],
-        ":bogISBN" => $data["bogISBN"]
+        ":bogISBN" => $data["bogISBN"],
+        ":bogBillede" => (!empty($file["bogBillede"]["tmp_name"])) ? $file["bogBillede"]["name"] : NULL,
+        /*Vi laver her en kort if/else statement, for at den kun sætte det ind, hvis det er et billede*/
+
     ];
 
     /*sql skal indeholder en sql sætning og bind, som er dem vi har lavet ovenover*/
     $db -> sql($sql, $bind, false);
+
 
 
 }
@@ -44,13 +57,14 @@ if(!empty($_POST["data"])){
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.typekit.net/ozj7xgt.css">
+    <link rel="stylesheet" href="https://use.typekit.net/ozj7xgt.css">
     <script src="https://cdn.tiny.cloud/1/yz25l80g4c2pvmvsajtmlykwglnzhll3fz81r5ey6kj9ml5i/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
+<body class="bgInsert">
 
 
     <div class="container">
@@ -63,7 +77,7 @@ if(!empty($_POST["data"])){
 
 
 
-    <form method="post" action="insert.php">
+    <form method="post" action="insert.php" enctype="multipart/form-data">
 
         <div class="container">
             <div class="row">
@@ -137,6 +151,11 @@ if(!empty($_POST["data"])){
                                 <textarea class="form-control" name="data[bogBeskrivelse]" id="bogBeskrivelse" placeholder="Beskrivelse af bogen"></textarea>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <label class="form-label" for="bogBillede">Billede af bogen</label>
+                            <input type="file" class="form-control" id="bogBillede" name="bogBillede">
+                        </div>
+
                     </div>
 
                 </div>
@@ -148,11 +167,6 @@ if(!empty($_POST["data"])){
                     <button class="form-control btn" type="submit" id="btnSubmit">Opret bog</button>
                 </div>
             </div>
-
-
-
-
-
         </div>
 
     </form>

@@ -21,8 +21,15 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 
 body{
-	background-image: url("../images/Libary.jpg") ;
+	font-family: "montserrat", sans-serif;
+	font-weight: 500;
+	font-style: normal;
 	color: white;
+}
+
+.bgInsert{
+	background-image: url("../images/Libary.jpg") ;
+	background-repeat: no-repeat;
 }
 
 .OverskriftFont{
@@ -31,6 +38,10 @@ body{
 	font-style: normal;
 	color: white;
 
+}
+
+.colorFont{
+	color: white;
 }
 
 .btn{
@@ -46,4 +57,11 @@ body{
 	border-color: #6e5456;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(166, 122, 105, 0.6);
 
+}
+
+.bgBogVisning{
+	background-color: rgba(110,84,86,0.60);
+}
+
+.border{
 }

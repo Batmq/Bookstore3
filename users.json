@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Dig",
+    "age": "77",
+    "image": "dig.jpg",
+    "favoriteColors": [
+      "red",
+      "green"
+    ],
+    "hobbies": {
+      "cs": "god",
+      "badminton": "noob"
+    }
+  },
+  {
+    "name": "Mig",
+    "age": "54",
+    "image": "dig.jpg",
+    "favoriteColors": [
+      "Blue",
+      "Yellow"
+    ],
+    "hobbies": {
+      "cs": "noob",
+      "badminton": "god"
+    }
+  }
+]

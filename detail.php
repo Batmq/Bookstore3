@@ -24,16 +24,16 @@ require "settings/init.php";
 
 <div class="container mt-5">
     <?php
-    $produkter = $db->sql("SELECT * FROM produkter WHERE bogID = 102" );
+    $produkter = $db->sql("SELECT * FROM produkter WHERE bogID = 102");
     foreach($produkter as $produkt) {
 
         ?>
 
         <div class="row p-5 border border-5 rounded-3 bgBogVisning">
             <div class="col-4">
-               <img class="img-fluid" src="uploads/DenBrændendeBro.JPG">
+               <img class="img-fluid" src="uploads/<?php echo $produkt->bogBillede; ?>">
             </div>
-            <div class="col-6 ps-3">
+            <div class="col-8 ps-3">
              <div class="row">
                  <div class="col-12">
                      <h1><?php echo $produkt->bogNavn; ?></h1>

@@ -57,7 +57,6 @@ if(!empty($_POST["data"])){
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.typekit.net/ozj7xgt.css">
-    <link rel="stylesheet" href="https://use.typekit.net/ozj7xgt.css">
     <script src="https://cdn.tiny.cloud/1/yz25l80g4c2pvmvsajtmlykwglnzhll3fz81r5ey6kj9ml5i/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
@@ -66,20 +65,9 @@ if(!empty($_POST["data"])){
 
 <body class="bgInsert">
 
-
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center p-5 OverskriftFont display-1">
-                Bookstore
-            </div>
-        </div>
-    </div>
-
-
-
     <form method="post" action="insert.php" enctype="multipart/form-data">
 
-        <div class="container">
+        <div class="container pt-3">
             <div class="row">
                 <div class="col-12 col-md-6">
 

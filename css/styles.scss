@@ -63,5 +63,23 @@ body{
 	background-color: rgba(110,84,86,0.60);
 }
 
-.border{
+.bgForside{
+	background-color: #6e5456;
+}
+
+.products .items .card-img-top{
+	height: 500px;
+	object-fit: cover;
+}
+
+.products .items .card-height{
+	min-height: 750px;
+}
+
+.products .items .card-text-size{
+	font-size: 0.8rem;
+}
+
+.border-color{
+	border-color: transparent;
 }

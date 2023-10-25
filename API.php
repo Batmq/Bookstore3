@@ -12,13 +12,16 @@ nameSearch: Valgfri
 header("Content-Type: application/json; charset=utf-8"); /*Fortæller det at den skal opfører sig som en json fil i stedet for en PHP fil*/
 
 if(isset($data["password"]) && $data["password"] == "Bookstore"){ /*Tjekker om password er der og om det er rigtigt*/
-
-    $sql = "SELECT * FROM prdukter WHERE 1=1";
-    $bind [":bogNavn"] = $data["nameSearch"];
+    $sql = "SELECT * FROM produkter WHERE 1=1";
+    $bind = [];
 
     if(!empty($data["nameSearch"])) {
-        $sql = $sql . " AND bogNavn = :bogNavn ";
+        $sql .= " AND bogNavn  LIKE CONCAT('%', :bogNavn, '%')";
+        $bind [":bogNavn"] = $data["nameSearch"];
     }
+
+
+
 
     $produkter = $db -> sql($sql, $bind);
     header("HTTP/1.1 200 OK");
@@ -29,7 +32,6 @@ if(isset($data["password"]) && $data["password"] == "Bookstore"){ /*Tjekker om p
 } else { /*Det er det der sker, hvis ens password er forkert*/
     header("HTTP/1.1 401 Unauthorized"); /*Viser der er sket en fejl*/
     $error["errorMessage"] = "Dit kodeord var forkert"; /*Fejlmeddelse*/
-
     echo json_encode($error); /*Printer vores fejlmeddelse til skærmen i json format*/
 }
 ?>
